@@ -1,0 +1,157 @@
+
+#header{
+    height: 100px;
+    padding: 10px;
+    background-image: url("../images/fondo-header.jpg");
+}
+*{
+    padding: 0;
+    margin: 0;
+    
+}
+#content{
+    margin: 0 auto;
+    width: 900px;
+    height: 100%;
+    border: 1px solid;
+   
+}
+.logo{
+    height: 50px;
+    width: 100px;
+    float: left;
+
+}
+
+#social-icons{
+    display: flex;
+    height: 100px;
+    width: 900px;
+    
+}
+
+.social-icons-b{
+    float: right;
+    padding-left: 60px;
+    margin: 15px;
+    
+}
+.icono{
+    width: 20px;
+}
+
+#nav{
+    display: inline-block;
+    width: 900px;
+    margin: 0px 0px 5px 0pc;
+    background-color: black;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+}
+#nav ul{
+    list-style-type: none;
+    text-align: center;
+    padding-inline-start: 0px;
+
+}
+#nav ul li{
+    display: inline-block;
+    
+}
+#nav ul li a{
+    color: white;
+    display: block;
+    padding: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+
+}
+#nav ul li a:hover{
+    background-color: cadetblue;
+}
+#images{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+    margin: 5px;
+}
+#image1{
+    width: 30%;
+    margin: 3px;
+    padding: 10px;
+    position: relative;
+}
+#image2{
+    width: 30%;
+    margin: 3px;
+    padding: 10px;
+    position: relative;
+}
+#image3{
+    width: 30%;
+    margin: 3px;
+    padding: 10px;
+    position: relative;
+
+}
+.foto{
+    width: 105%;
+}
+
+#central-section{
+    width: 610px;
+    height: 630px;
+    background-color: rgb(218, 210, 138);
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    align-content: center;
+    
+}
+.card{
+    padding: 2px;
+    margin:5px;
+    overflow: hidden;
+    margin:20px;
+    text-align: center;
+}
+.article{
+    height: 100px;
+}
+.button-card{
+    background-color: darksalmon;
+    border-radius: 40px;
+    padding: 10px;
+    line-height: 0px;
+    text-decoration: none;
+    color:crimson;
+}
+.button-card:hover{
+    background-color: darkcyan;
+    color: white;
+}
+body{
+    background-color: coral;
+    
+}
+body a{
+    text-decoration: none;
+    color: white;
+}
+
+#footer{
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    background:#b3f9d3;
+}
+#footer a{
+    color: black;
+}
+.contact{
+    font-family: 'Open Sans Condensed', sans-serif;
+    margin: 0px 0px 0px 15px;
+}
