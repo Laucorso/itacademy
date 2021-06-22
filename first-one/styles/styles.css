@@ -154,3 +154,6 @@ body a{
     font-family: 'Open Sans Condensed', sans-serif;
     margin: 0px 0px 0px 15px;
 }
+.email{
+    font-family:'Courier New', Courier, monospace;
+}
