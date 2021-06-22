@@ -17,8 +17,6 @@
    
 }
 .logo{
-    height: 50px;
-    width: 100px;
     float: left;
 
 }
@@ -31,13 +29,10 @@
 }
 
 .social-icons-b{
-    float: right;
-    padding-left: 60px;
-    margin: 15px;
-    
+    float: right;    
 }
 .icono{
-    width: 20px;
+    width: 25px;
 }
 
 #nav{
