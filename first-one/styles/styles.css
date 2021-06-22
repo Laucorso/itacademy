@@ -105,6 +105,9 @@
     align-content: center;
     
 }
+h3{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 .card{
     overflow: hidden;
     margin: 10px;
