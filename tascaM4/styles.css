@@ -1,0 +1,33 @@
+.container{
+    display: inline-flex;    
+}
+
+
+.navbar{
+    background-color: sandybrown;
+}
+.navbar-nav{
+    list-style: none;
+    
+}
+.navbar-toggler{
+    padding: 10px;
+    margin-left: 5px;
+}
+.navbar-toggler-icon {
+    background-image: url("../img/hamburger_icon.png");
+  }
+
+.login-container{
+   
+}
+.model-dialog{
+
+    width: 30%;
+}
+.model-content{
+    text-align: center;
+}
+.container{
+    height: 900px;
+}
