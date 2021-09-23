@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2021-09-15 17:40
+-- Generated: 2021-09-23 12:54
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -9,88 +9,120 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-CREATE SCHEMA IF NOT EXISTS `Optica` DEFAULT CHARACTER SET utf8 ;
+ALTER TABLE `optica`.`Proveïdors` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
+DROP COLUMN `Telefon`,
+ADD COLUMN `Telf` TINYINT(9) NOT NULL AFTER `Adreça`,
+ADD COLUMN `Ulleres_idUlleres` INT(11) NOT NULL AFTER `NIF`,
+CHANGE COLUMN `Nom` `Nom` INT(11) NOT NULL ,
+CHANGE COLUMN `Fax` `Fax` TINYINT(9) NOT NULL ,
+CHANGE COLUMN `NIF` `NIF` TINYINT(10) NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`Nom`, `Ulleres_idUlleres`),
+ADD INDEX `fk_Proveïdors_Ulleres_idx` (`Ulleres_idUlleres` ASC) VISIBLE;
+;
 
-CREATE TABLE IF NOT EXISTS `Optica`.`Proveïdors` (
+ALTER TABLE `optica`.`Ulleres` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
+DROP COLUMN `Vidre_color`,
+DROP COLUMN `Muntura_color`,
+DROP COLUMN `Muntura_tipus`,
+DROP COLUMN `Graduacio_Vidres`,
+ADD COLUMN `idUlleres` INT(11) NOT NULL AUTO_INCREMENT FIRST,
+ADD COLUMN `Graduació_Vidres` VARCHAR(45) NOT NULL AFTER `Marca`,
+ADD COLUMN `Tipus_Muntura` ENUM('Flotant', 'Pasta', 'Metàllica') NOT NULL AFTER `Graduació_Vidres`,
+ADD COLUMN `Color_Vidre` VARCHAR(45) NOT NULL AFTER `Tipus_Muntura`,
+CHANGE COLUMN `Preu` `Preu` VARCHAR(45) NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`idUlleres`);
+;
+
+CREATE TABLE IF NOT EXISTS `optica`.`Empleats` (
+  `idEmpleats` INT(11) NOT NULL AUTO_INCREMENT,
   `Nom` VARCHAR(45) NOT NULL,
-  `Adreça` VARCHAR(45) NOT NULL,
-  `Telefon` TINYINT(15) NOT NULL,
-  `Fax` TINYINT(10) NULL DEFAULT NULL,
-  `NIF` VARCHAR(9) NOT NULL,
-  PRIMARY KEY (`Nom`))
+  `Cognoms` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idEmpleats`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Optica`.`Ulleres` (
-  `Marca` VARCHAR(45) NOT NULL,
-  `Graduacio_Vidres` DECIMAL NOT NULL,
-  `Muntura_tipus` TINYTEXT NOT NULL,
-  `Muntura_color` TINYTEXT NOT NULL,
-  `Vidre_color` TINYTEXT NOT NULL,
-  `Preu` DECIMAL NOT NULL,
-  PRIMARY KEY (`Marca`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE IF NOT EXISTS `Optica`.`Client` (
-  `Nom` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `optica`.`Clients` (
+  `Nom` INT(11) NOT NULL,
   `Adreça` VARCHAR(45) NOT NULL,
-  `Telèfon` TINYINT(10) NOT NULL,
+  `Telf` VARCHAR(45) NOT NULL,
   `Correu` VARCHAR(45) NOT NULL,
-  `Data_registre` DATETIME NOT NULL,
-  `Client_recomenat_per` TEXT(45) NULL DEFAULT NULL,
+  `Data_Registre` VARCHAR(45) NOT NULL,
+  `Recomanat_Per` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Nom`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Optica`.`Empleat` (
-  `Nom` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Nom`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE IF NOT EXISTS `Optica`.`Proveidor_has_ulleres` (
-  `Ulleres_Marca` VARCHAR(45) NOT NULL,
-  `Proveïdors_Nom` VARCHAR(45) NOT NULL,
-  INDEX `fk_Proveidor_has_ulleres_Ulleres1_idx` (`Ulleres_Marca` ASC) VISIBLE,
-  PRIMARY KEY (`Proveïdors_Nom`),
-  CONSTRAINT `fk_Proveidor_has_ulleres_Ulleres1`
-    FOREIGN KEY (`Ulleres_Marca`)
-    REFERENCES `Optica`.`Ulleres` (`Marca`)
+CREATE TABLE IF NOT EXISTS `optica`.`Botiga Cul d'ampolla` (
+  `Nom` INT(11) NOT NULL,
+  `Empleats_idEmpleats` INT(11) NOT NULL,
+  `Ulleres_idUlleres` INT(11) NOT NULL,
+  `Clients_Nom` INT(11) NOT NULL,
+  PRIMARY KEY (`Nom`, `Empleats_idEmpleats`, `Ulleres_idUlleres`, `Clients_Nom`),
+  INDEX `fk_Botiga_Empleats1_idx` (`Empleats_idEmpleats` ASC) VISIBLE,
+  INDEX `fk_Botiga_Ulleres1_idx` (`Ulleres_idUlleres` ASC) VISIBLE,
+  INDEX `fk_Botiga_Clients1_idx` (`Clients_Nom` ASC) VISIBLE,
+  CONSTRAINT `fk_Botiga_Empleats1`
+    FOREIGN KEY (`Empleats_idEmpleats`)
+    REFERENCES `optica`.`Empleats` (`idEmpleats`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Proveidor_has_ulleres_Proveïdors1`
-    FOREIGN KEY (`Proveïdors_Nom`)
-    REFERENCES `Optica`.`Proveïdors` (`Nom`)
+  CONSTRAINT `fk_Botiga_Ulleres1`
+    FOREIGN KEY (`Ulleres_idUlleres`)
+    REFERENCES `optica`.`Ulleres` (`idUlleres`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Botiga_Clients1`
+    FOREIGN KEY (`Clients_Nom`)
+    REFERENCES `optica`.`Clients` (`Nom`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Optica`.`Detall_Venta` (
-  `Client_Nom` VARCHAR(45) NOT NULL,
-  `Ulleres_Marca1` VARCHAR(45) NOT NULL,
-  `Empleat_Nom` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Client_Nom`, `Empleat_Nom`),
-  INDEX `fk_Client_compra_Ulleres2_idx` (`Ulleres_Marca1` ASC) VISIBLE,
-  INDEX `fk_Client_compra_Empleat1_idx` (`Empleat_Nom` ASC) VISIBLE,
-  CONSTRAINT `fk_Client_compra_Client1`
-    FOREIGN KEY (`Client_Nom`)
-    REFERENCES `Optica`.`Client` (`Nom`)
+CREATE TABLE IF NOT EXISTS `optica`.`Ventas` (
+  `idVenta` INT(11) NOT NULL,
+  `idEmpleat` INT(11) NOT NULL,
+  `idClients` INT(11) NOT NULL,
+  `idUlleres` INT(11) NOT NULL,
+  INDEX `idEmpleat_idx` (`idEmpleat` ASC) VISIBLE,
+  INDEX `idClients_idx` (`idClients` ASC) VISIBLE,
+  INDEX `idUlleres_idx` (`idUlleres` ASC) VISIBLE,
+  CONSTRAINT `idEmpleat`
+    FOREIGN KEY (`idEmpleat`)
+    REFERENCES `optica`.`Empleats` (`idEmpleats`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Client_compra_Ulleres2`
-    FOREIGN KEY (`Ulleres_Marca1`)
-    REFERENCES `Optica`.`Ulleres` (`Marca`)
+  CONSTRAINT `idClients`
+    FOREIGN KEY (`idClients`)
+    REFERENCES `optica`.`Clients` (`Nom`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Client_compra_Empleat1`
-    FOREIGN KEY (`Empleat_Nom`)
-    REFERENCES `Optica`.`Empleat` (`Nom`)
+  CONSTRAINT `idUlleres`
+    FOREIGN KEY (`idUlleres`)
+    REFERENCES `optica`.`Ulleres` (`idUlleres`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+DROP TABLE IF EXISTS `optica`.`proveidor_has_ulleres` ;
+
+DROP TABLE IF EXISTS `optica`.`empleat` ;
+
+DROP TABLE IF EXISTS `optica`.`detall_venta` ;
+
+DROP TABLE IF EXISTS `optica`.`client` ;
+
+ALTER TABLE `optica`.`Proveïdors` 
+ADD CONSTRAINT `fk_Proveïdors_Ulleres`
+  FOREIGN KEY (`Ulleres_idUlleres`)
+  REFERENCES `optica`.`Ulleres` (`idUlleres`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
