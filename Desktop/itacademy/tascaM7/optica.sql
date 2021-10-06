@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2021-09-23 12:54
+-- Generated: 2021-10-06 17:04
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -19,7 +19,7 @@ CHANGE COLUMN `Fax` `Fax` TINYINT(9) NOT NULL ,
 CHANGE COLUMN `NIF` `NIF` TINYINT(10) NOT NULL ,
 DROP PRIMARY KEY,
 ADD PRIMARY KEY (`Nom`, `Ulleres_idUlleres`),
-ADD INDEX `fk_Proveïdors_Ulleres_idx` (`Ulleres_idUlleres` ASC) VISIBLE;
+ADD INDEX `fk_Proveïdors_Ulleres1_idx` (`Ulleres_idUlleres` ASC) VISIBLE;
 ;
 
 ALTER TABLE `optica`.`Ulleres` 
@@ -51,8 +51,21 @@ CREATE TABLE IF NOT EXISTS `optica`.`Clients` (
   `Telf` VARCHAR(45) NOT NULL,
   `Correu` VARCHAR(45) NOT NULL,
   `Data_Registre` VARCHAR(45) NOT NULL,
-  `Recomanat_Per` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Nom`))
+  `Botiga Cul d'ampolla_Nom` INT(11) NOT NULL,
+  `Recomanat_Client` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`Nom`, `Botiga Cul d'ampolla_Nom`),
+  INDEX `fk_Clients_Botiga Cul d'ampolla1_idx` (`Botiga Cul d'ampolla_Nom` ASC) VISIBLE,
+  INDEX `fk_Clients_Clients1_idx` (`Recomanat_Client` ASC) VISIBLE,
+  CONSTRAINT `fk_Clients_Botiga Cul d'ampolla1`
+    FOREIGN KEY (`Botiga Cul d'ampolla_Nom`)
+    REFERENCES `optica`.`Botiga Cul d'ampolla` (`Nom`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Clients_Clients1`
+    FOREIGN KEY (`Recomanat_Client`)
+    REFERENCES `optica`.`Clients` (`Nom`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -60,11 +73,9 @@ CREATE TABLE IF NOT EXISTS `optica`.`Botiga Cul d'ampolla` (
   `Nom` INT(11) NOT NULL,
   `Empleats_idEmpleats` INT(11) NOT NULL,
   `Ulleres_idUlleres` INT(11) NOT NULL,
-  `Clients_Nom` INT(11) NOT NULL,
-  PRIMARY KEY (`Nom`, `Empleats_idEmpleats`, `Ulleres_idUlleres`, `Clients_Nom`),
+  PRIMARY KEY (`Nom`, `Empleats_idEmpleats`, `Ulleres_idUlleres`),
   INDEX `fk_Botiga_Empleats1_idx` (`Empleats_idEmpleats` ASC) VISIBLE,
   INDEX `fk_Botiga_Ulleres1_idx` (`Ulleres_idUlleres` ASC) VISIBLE,
-  INDEX `fk_Botiga_Clients1_idx` (`Clients_Nom` ASC) VISIBLE,
   CONSTRAINT `fk_Botiga_Empleats1`
     FOREIGN KEY (`Empleats_idEmpleats`)
     REFERENCES `optica`.`Empleats` (`idEmpleats`)
@@ -73,11 +84,6 @@ CREATE TABLE IF NOT EXISTS `optica`.`Botiga Cul d'ampolla` (
   CONSTRAINT `fk_Botiga_Ulleres1`
     FOREIGN KEY (`Ulleres_idUlleres`)
     REFERENCES `optica`.`Ulleres` (`idUlleres`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Botiga_Clients1`
-    FOREIGN KEY (`Clients_Nom`)
-    REFERENCES `optica`.`Clients` (`Nom`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -118,7 +124,7 @@ DROP TABLE IF EXISTS `optica`.`detall_venta` ;
 DROP TABLE IF EXISTS `optica`.`client` ;
 
 ALTER TABLE `optica`.`Proveïdors` 
-ADD CONSTRAINT `fk_Proveïdors_Ulleres`
+ADD CONSTRAINT `fk_Proveïdors_Ulleres1`
   FOREIGN KEY (`Ulleres_idUlleres`)
   REFERENCES `optica`.`Ulleres` (`idUlleres`)
   ON DELETE NO ACTION

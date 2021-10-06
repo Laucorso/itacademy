@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2021-09-23 12:52
+-- Generated: 2021-10-06 17:03
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -37,6 +37,36 @@ CHANGE COLUMN `Codi` `Codi` TINYINT(5) NOT NULL ;
 ALTER TABLE `pizzeria`.`Empleats` 
 CHARACTER SET = utf8 , COLLATE = utf8_general_ci ,
 CHANGE COLUMN `Telf` `Telf` TINYINT(9) NOT NULL ;
+
+CREATE TABLE IF NOT EXISTS `pizzeria`.`Pizzes` (
+  `idPizzes` INT(11) NOT NULL,
+  `Nom` VARCHAR(45) NOT NULL,
+  `Descripció` TEXT(100) NOT NULL,
+  `Imatge` VARCHAR(45) NOT NULL,
+  `Preu` DECIMAL(2,2) NOT NULL,
+  PRIMARY KEY (`idPizzes`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `pizzeria`.`Begudes` (
+  `idBegudes` INT(11) NOT NULL,
+  `Nom` VARCHAR(45) NOT NULL,
+  `Descripció` TEXT(100) NOT NULL,
+  `Imatge` VARCHAR(45) NOT NULL,
+  `Preu` DECIMAL(2,2) NOT NULL,
+  PRIMARY KEY (`idBegudes`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `pizzeria`.`Hamburgueses` (
+  `idHamburgueses` INT(11) NOT NULL,
+  `Nom` VARCHAR(45) NOT NULL,
+  `Descripció` TEXT(100) NOT NULL,
+  `Imatge` VARCHAR(45) NOT NULL,
+  `Preu` DECIMAL(2,2) NOT NULL,
+  PRIMARY KEY (`idHamburgueses`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 ALTER TABLE `pizzeria`.`Clients` 
 ADD CONSTRAINT `fk_Clients_Comanda1`
