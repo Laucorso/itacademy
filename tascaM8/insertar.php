@@ -6,6 +6,7 @@ require_once "metodes.php";
 $producte = $_POST['txtproducte'];
 $preu = $_POST['txtpreu'];
 $quantitat = $_POST['txtquantitat'];
+$total = $preu * $quantitat;
 $dades = array(
             $producte,
             $preu,
@@ -17,3 +18,4 @@ if($obj -> insertarDades($dades)==1){
 }else{
     echo "Ha fallat al inserir";
 }
+mysqli_close($connexio);

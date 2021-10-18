@@ -18,3 +18,4 @@
     }else{
         echo "Ha fallat a l'actualitzar les dades";
     }
+    

@@ -6,6 +6,7 @@ class taula{
         $connexio = $c -> connexio();
         $result = mysqli_query($connexio, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_close($connexio);
     }
 
     public function insertarDades($dades){
@@ -14,6 +15,7 @@ class taula{
         $sql = "INSERT into compra (nom, preu, quantitat) 
                                 values('$dades[1]', '$dades[2]', '$dades[3]')";
         return $result = mysqli_query($connexio, $sql);
+        mysqli_close($connexio);
     }
 
     public function modificarDades($dades){
@@ -24,6 +26,7 @@ class taula{
                                     preu = '$dades[2]'
                                     where id = '$dades[3]'"; //important pq no ens actualitzin tots els id, nomes el q volem!!
         return $result = mysqli_query($connexio,$sql);
+        mysqli_close($connexio);
     }
 
     public function eliminarDades($id){
@@ -31,6 +34,7 @@ class taula{
         $connexio = $c -> connexio();
         $sql = "DELETE from compra where id = '$id'";
         return $result = mysqli_query($connexio,$sql);
+        mysqli_close($connexio);
     }
 }
 ?>

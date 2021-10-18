@@ -17,7 +17,7 @@ class Connectar{
 }
 $obj = new Connectar();
 if ($obj -> connexio()){
-    echo "Connectat amb èxit";
+    echo "";
 }else{
     echo "Ha fallat la connexió";
 }
