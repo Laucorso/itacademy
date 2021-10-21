@@ -18,4 +18,5 @@ if($obj -> insertarDades($dades)==1){
 }else{
     echo "Ha fallat al inserir";
 }
+
 ?>
