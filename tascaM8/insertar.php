@@ -6,11 +6,11 @@ require_once "metodes.php";
 $producte = $_POST['txtproducte'];
 $preu = $_POST['txtpreu'];
 $quantitat = $_POST['txtquantitat'];
-$total = $preu * $quantitat;
 $dades = array(
             $producte,
             $preu,
-            $quantitat);
+            $quantitat,
+            );
 
 $obj = new taula();
 if($obj -> insertarDades($dades)==1){

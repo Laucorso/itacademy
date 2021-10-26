@@ -39,24 +39,28 @@
     $obj = new taula();
     $sql = "SELECT id,nom,preu,quantitat from compra";
     $dades = $obj ->mostrarDades($sql);
+    $total1 = 0;
     foreach($dades as $key){
 ?>
     <tr>
         <td><?php echo $key['nom'];?></td>
         <td><?php echo $key['preu'];?></td>
         <td><?php echo $key['quantitat'];?></td>
-        <td><?php echo ""?></td>
+        <td><?php echo $total = $key['preu']*$key['quantitat'];?></td>
         <td><a href = "modificar.php?id=<?php echo $key['id']?>">Modificar</a></td>
         <td><a href = "eliminar.php?id=<?php echo $key['id']?>">Eliminar</a></td>
-
     </tr>
-
-<?php
-
-}
-
+    <?php $total = $total + ( $key['preu'] * $key['quantitat']); ?>
     
+<?php
+//acumulem el total per cada nova iteracio
+}
 ?>
 </table>
+    <tr>
+        <td>
+            Resultat sumatori del total: <?php echo $total;?>
+        </td>
+    </tr>
 </body>
 </html>
