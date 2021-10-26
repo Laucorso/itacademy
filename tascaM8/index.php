@@ -39,7 +39,7 @@
     $obj = new taula();
     $sql = "SELECT id,nom,preu,quantitat from compra";
     $dades = $obj ->mostrarDades($sql);
-    $total1 = 0;
+    $total = 0;
     foreach($dades as $key){
 ?>
     <tr>

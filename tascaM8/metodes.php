@@ -13,7 +13,7 @@ class taula{
         $c = new Connectar();
         $connexio = $c -> connexio();
         $sql = "INSERT into compra (nom, preu, quantitat) 
-                                values('$dades[1]', '$dades[2]', '$dades[3]')";
+                                values('$dades[0]', '$dades[1]', '$dades[2]')";
         return $result = mysqli_query($connexio, $sql);
         mysqli_close($connexio);
     }
@@ -22,8 +22,8 @@ class taula{
         $c = new Connectar();
         $connexio = $c -> connexio();
         $sql = "UPDATE compra set  nom = '$dades[0]',
-                                    quantitat = '$dades[1]',
-                                    preu = '$dades[2]'
+                                    preu = '$dades[1]',
+                                    quantitat = '$dades[2]'
                                     where id = '$dades[3]'"; //important pq no ens actualitzin tots els id, nomes el q volem!!
         return $result = mysqli_query($connexio,$sql);
         mysqli_close($connexio);
