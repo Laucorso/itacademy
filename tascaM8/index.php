@@ -46,7 +46,7 @@
         <td><?php echo $key['nom'];?></td>
         <td><?php echo $key['preu'];?></td>
         <td><?php echo $key['quantitat'];?></td>
-        <td><?php echo $total = $key['preu']*$key['quantitat'];?></td>
+        <td><?php echo $key['preu']*$key['quantitat'];?></td>
         <td><a href = "modificar.php?id=<?php echo $key['id']?>">Modificar</a></td>
         <td><a href = "eliminar.php?id=<?php echo $key['id']?>">Eliminar</a></td>
     </tr>
