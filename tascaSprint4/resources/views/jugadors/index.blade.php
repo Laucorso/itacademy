@@ -38,7 +38,7 @@
                                 <span>Eliminar</span>
                             </button>
                         </form>
-                            <a href="{{route('jugadors.edit', $jugador)}}">
+                            <a href="{{route('jugadors.edit', $jugador->id)}}">
                                 <button class="bg-blue-500 hover:bg-blue-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2zM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18zM15.27 4L18 6.73l-2 1.95L13.32 6z" fill="currentColor"/></svg>
                                     <span>Editar</span>

@@ -2,16 +2,11 @@
 @section('title', 'Editar Registres')
 @section('container')
 
-    @csrf
-    @method('PUT')
     <div class ="mt-6 md:w-1/2 px-3 mb-6 md:mb-0">
         <form action= "{{ route('jugadors.update', $jugador->id) }}" method ="POST">
+        @method('PUT')
         @csrf
-        @if(session('jugadorGuardat'))
-            <div>
-                {{session('jugadorGuardat')}}
-            </div>
-        @endif
+
                 <label>
                     Nom
                     <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4" name="nom" type="text" value="{{$jugador->nom}}">

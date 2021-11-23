@@ -21,4 +21,3 @@ class Jugador extends Model
 
     
 }
-https://github.com/tailwindadmin/admin.git

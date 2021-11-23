@@ -12,6 +12,12 @@ class JugadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function benvinguda()
+    {
+        return view('jugadors.benvinguda');
+    }
+
     public function index()
     {
         $jugadors = Jugador::all();
@@ -52,7 +58,7 @@ class JugadorController extends Controller
         $jugador -> phone = $request->phone;
         $jugador -> save();
 
-        return redirect()->route('jugadors.show',$jugador);
+        return redirect()->route('jugadors.index',$jugador);
     }
 
     /**
@@ -64,7 +70,7 @@ class JugadorController extends Controller
     public function show($id)
     {   
         $jugador = Jugador::find($id);
-        return view('jugadors.show', compact('jugador'));
+        return view('jugadors.index', compact('jugador'));
     }
     
     /**
@@ -76,7 +82,7 @@ class JugadorController extends Controller
     public function edit($id)
     {
         $jugador = Jugador::find($id);
-        return view('jugadors.edit')->with('jugador', $jugador);
+        return view('jugadors.edit', compact ('jugador'));
     }
 
     /**
@@ -96,12 +102,13 @@ class JugadorController extends Controller
         ]);
 
         $jugador = Jugador::find($id);
-        $jugador -> nom = $request->get('nom');
-        $jugador -> cognom = $request->get('cognom');
-        $jugador -> email = $request->get('email');
-        $jugador -> phone = $request->get('phone');
-        $jugador -> save();
-        return view('jugadors.index');
+        $jugador -> nom = $request->input('nom');
+        $jugador -> cognom = $request->input('cognom');
+        $jugador -> email = $request->input('email');
+        $jugador -> phone = $request->input('phone');
+        $jugador->save();
+        return redirect()->route('jugadors.index');
+      
     }
 
     /**
