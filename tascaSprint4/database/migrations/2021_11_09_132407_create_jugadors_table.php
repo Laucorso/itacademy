@@ -17,7 +17,7 @@ class CreateJugadorsTable extends Migration
             $table->id();
             $table->string('nom', 10);
             $table->string('cognom', 30);
-            $table->string('email', 20);
+            $table->string('email', 50);
             $table->integer('phone');
         });
     }

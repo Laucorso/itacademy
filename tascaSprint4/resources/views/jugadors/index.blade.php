@@ -3,7 +3,7 @@
 @section('container')
 
 <a href = "jugadors/create">
-    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-800 rounded">
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-4 border border-green-800 rounded inline-flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M21 2H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 7h-7v2h7v5H3v-5h5v3l4-4l-4-4v3H3V4h18z" fill="currentColor"/></svg>
         <span>Registrar nou jugador</span>
     </button>
@@ -49,5 +49,6 @@
             </tr>
             @endforeach
         </tbody>
+    
     </table>
 @endsection
