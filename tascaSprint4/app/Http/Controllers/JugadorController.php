@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\validacioFormularis;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
+use App\Exceptions\JugadorNotFoundException;
+
 
 class JugadorController extends Controller
 {
@@ -12,7 +13,13 @@ class JugadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
+    public function __construct()
+    {
+        $this->middleware('data');
+
+    }
+
     public function benvinguda()
     {
         return view('jugadors.benvinguda');
@@ -21,8 +28,8 @@ class JugadorController extends Controller
     public function index()
     {
         $jugadors = Jugador::all();
+
         return view('jugadors.index', compact('jugadors'));
-        return $jugadors;
     }
 
     /**
@@ -69,10 +76,16 @@ class JugadorController extends Controller
      */
     public function show($id)
     {   
-        $jugador = Jugador::find($id);
+        try{         
+            $jugador = Jugador::findOrFail($id);
+        }catch(\Exception $exception){
+            throw new JugadorNotFoundException();
+        }
+        
+      
         return view('jugadors.index', compact('jugador'));
-    }
     
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -81,10 +94,14 @@ class JugadorController extends Controller
      */
     public function edit($id)
     {
-        $jugador = Jugador::find($id);
+        try{         
+            $jugador = Jugador::findOrFail($id);
+        }catch(\Exception $exception){
+            throw new JugadorNotFoundException();
+        }
         return view('jugadors.edit', compact ('jugador'));
+    
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -122,4 +139,6 @@ class JugadorController extends Controller
         $jugador ->delete();
         return redirect()->route('jugadors.index');
     }
+
+
 }
