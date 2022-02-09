@@ -9,15 +9,5 @@ class Jugador extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    
 
-    
-    protected $fillable = [
-        'nom',
-        'cognom',
-        'email',
-        'phone',
-    ];
-
-    
 }

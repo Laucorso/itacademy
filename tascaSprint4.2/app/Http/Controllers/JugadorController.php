@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
+use App\Events\ValidacioFormularis;
 
 class JugadorController extends Controller
 {
@@ -55,6 +57,7 @@ class JugadorController extends Controller
         $jugador -> email = $request->email;
         $jugador -> phone = $request->phone;
         $jugador -> save();
+        event(new ValidacioFormularis($request));
 
         return redirect()->route('jugadors.index',$jugador);
     }
@@ -65,7 +68,7 @@ class JugadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) 
     {   
         $jugador = Jugador::find($id);
         return view('jugadors.show', compact('jugador'));
@@ -92,12 +95,14 @@ class JugadorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $request->validate([
             'nom' => 'required|min:3|string',
             'cognom' => 'required',
             'email' => 'required|email',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9',
         ]);
+        event(new ValidacioFormularis($request));
 
         $jugador = Jugador::find($id);
         $jugador -> nom = $request->input('nom');
