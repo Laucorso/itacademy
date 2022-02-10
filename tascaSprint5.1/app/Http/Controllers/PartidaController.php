@@ -40,23 +40,26 @@ class PartidaController extends Controller
      */
     public function store(Request $request, $id)
     {
+
         $jugador = Jugador::find($id);
+        dd($request->input('dau1'));
         $request->validate([
             'dau1' => 'integer|min:1|max:6|required',
             'dau2' => 'integer|min:1|max:6|required',
         ]);
         
+
         if ('dau1'+'dau2' === 7){
-            $resultat = 1;
+            $resultat = true;
         }else{
-            $resultat = 0;
+            $resultat = false;
         };
 
         Partida::create([
-            'dau1' => $request->dau1,
-            'dau2' => $request->dau2,
-            'resultat' => $resultat,
-            'jugador_id' => $jugador->id
+            'dau1' => 2,
+            'dau2' => 2,
+            'resultat' => TRUE,
+            'jugador_id' => 1
         ]);
         
         return redirect()->route('partides.indexByJugador', compact(['id' =>$jugador->id], 'partida'));
